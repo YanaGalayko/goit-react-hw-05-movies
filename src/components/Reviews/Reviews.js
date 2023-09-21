@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { fetchReviewsMovie } from "services/api"
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const Reviews = () => {
 const {movieId} = useParams()
@@ -37,7 +37,9 @@ useEffect(() => {
     }, [movieId])
 
     return (
+        
         <ul>
+            {loading && !error}
        {reviews.map(({ author, content, id}) => {
         return (
             <li key={id}>

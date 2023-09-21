@@ -2,7 +2,7 @@ import SearchBar from "components/SearchBar/SearchBar"
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchSearchMovies } from "services/api";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import MoviesList from "components/MoviesList/MoviesList";
 
 const MoviesPage = () => {
@@ -54,7 +54,7 @@ const MoviesPage = () => {
     return (
         <div>
             <SearchBar onSubmit={onSubmit}/>
-            {movies.length > 0 && <MoviesList movies={movies} />}
+            {movies.length > 0 && !loading && !error && <MoviesList movies={movies} />}
         </div>
     )
 }
