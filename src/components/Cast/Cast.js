@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom"
 import { fetchCreditsMovie } from "services/api"
 import toast, {Toaster} from 'react-hot-toast';
 import Loader from "components/Loader/Loader";
+import { CastList, 
+  CastTitle,
+  TextInfo} from "./CastStyled";
 
 const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
 
@@ -51,12 +54,12 @@ useEffect(() => {
       <>
       {loading && <Loader/>} 
       {!loading && <>
-        <ul>
+        <CastList>
         {cast.map(({ profile_path, name, character, id }) => {
         return (   
         <li key={id}>
         <img
-          width="300px"
+          width="80px"
           src={
             profile_path
               ? `https://image.tmdb.org/t/p/w500${profile_path}`
@@ -64,12 +67,12 @@ useEffect(() => {
           }
           alt={name}
          />
-            <h3>{name}</h3>
-            <p>Character: {character}</p>
+            <CastTitle>{name}</CastTitle>
+            <TextInfo>Character: {character}</TextInfo>
         </li>   
         )
        })}     
-        </ul>
+        </CastList>
       </>} 
         {error && !loading && toast.error('Sorry, something went wrong, please reload the page!',{
           duration: 4000,

@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router-dom";
+import { SearchInput, SearchBtn } from "./SearchBarStyled";
 
 const SearchBar = ({onSubmit}) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -14,14 +15,14 @@ const SearchBar = ({onSubmit}) => {
 
     return (
         <form onSubmit={onSubmit} onChange={updateQueryString}>
-            <input 
+            <SearchInput 
              type="text"
              name="query"
              defaultValue={searchId}
              autoComplete="off"
              autoFocus
              placeholder="Search movies"/>
-            <button>Search</button>
+            <SearchBtn>Search</SearchBtn>
         </form>
     )
 

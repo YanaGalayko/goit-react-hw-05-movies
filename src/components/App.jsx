@@ -1,22 +1,21 @@
-
 import HomePage from "pages/HomePage";
 import MoviesDetailsPage from "pages/MoviesDetailsPage";
 import MoviesPage from "pages/MoviesPage"
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Reviews from "./Reviews/Reviews";
 import Cast from "./Cast/Cast";
+import { GlobalStyle } from "./GlobalStyle";
+import { HeaderContainer, HeaderLink } from "./HeaderStyle";
 
 export const App = () => {
   return (
     <div>
-      <header>
+      <HeaderContainer>
       <nav>
-        <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/movies'>Movies</Link></li>
-        </ul>
+        <HeaderLink to='/'>Home</HeaderLink>
+        <HeaderLink to='/movies'>Movies</HeaderLink>
       </nav>
-      </header>
+      </HeaderContainer>
       <Routes>
         <Route path='/'element={<HomePage/>}/>
         <Route path='/movies'element={<MoviesPage/>}/>
@@ -25,6 +24,7 @@ export const App = () => {
           <Route path='reviews' element={<Reviews/>}/>
           </Route>
       </Routes>
+      <GlobalStyle/>
     </div>
   );
 };

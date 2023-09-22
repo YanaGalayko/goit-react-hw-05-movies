@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { fetchReviewsMovie } from "services/api"
 import toast, {Toaster} from 'react-hot-toast';
 import Loader from "components/Loader/Loader";
+import {ReviewsTitle, ReviewsInfo} from "./ReviewsStyled"
 
 const Reviews = () => {
 const {movieId} = useParams()
@@ -54,15 +55,15 @@ useEffect(() => {
                 {reviews.map(({ author, content, id}) => {
                    return (
                     <li key={id}>
-                    <h3>Autor: {author}</h3>
-                    <p>{content}</p>
+                    <ReviewsTitle>Autor: {author}</ReviewsTitle>
+                    <ReviewsInfo>{content}</ReviewsInfo>
                    </li>
                  )
                 })}
             </ul>
-            ) : (<p>
+            ) : (<ReviewsTitle>
                  We don't have any reviews for this movie
-                 </p>)}
+                 </ReviewsTitle>)}
          {error && !loading && toast.error('Sorry, something went wrong, please reload the page!',{
                duration: 4000,
             })}

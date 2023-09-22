@@ -3,6 +3,7 @@ import MoviesList from "components/MoviesList/MoviesList"
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react"
 import { fetchTrendingMovies } from "services/api"
+import { Container, Title } from "./HomePageStyled";
 
 const HomePage = () => {
 const [movies, setMovies] = useState([])
@@ -41,13 +42,15 @@ return () => {
 
 return (
         <main>
+            <Container>
             {loading && <Loader/>}
-            {!loading && <h2>Trending movies today</h2>}
+            {!loading && <Title>Trending movies today</Title>}
             {movies.length > 0 && !loading && !error && <MoviesList movies={movies}/>}
             {error && !loading &&  toast.error('Sorry, something went wrong, please reload the page!',{
                duration: 4000,
             })}
         <Toaster position="top-right" reverseOrder={false}/>
+        </Container>
         </main>
     )
 }
