@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link, Outlet, useLocation, useParams } from "react-router-dom"
 import { fetchDetailsMovie } from "services/api"
 import toast, { Toaster } from 'react-hot-toast';
@@ -13,43 +13,52 @@ const MoviesDetailsPage = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
+    const backLink = useRef(location.state?.from ?? '/');
+
     useEffect(() => {
         if (!movieId) {
             return;
           }
+        const controller = new AbortController()  
 
         const getMoviesDetails = async () => {
     try {
         setLoading(true)
         setError(false);
-        const data = await fetchDetailsMovie(movieId)
+        const data = await fetchDetailsMovie(movieId, {
+          signal: controller.signal
+        })
         setDetailsMovie(data)
-        // console.log(data);
     } catch (error) {
+      if (error.code !== 'ERR_CANCELED') {
         setError(true);
-          toast.error('Sorry, something went wrong, please try again!',{
-            duration: 4000,
-        });
+        toast.error('Sorry, something went wrong, please try again!',{
+          duration: 4000,
+      });
+    }  
     } finally {
         setLoading(false)
         setError(false);
     }}
     
     getMoviesDetails()
+
+    return () => {
+      controller.abort()
+  }
     
     }, [movieId])
 
     return (
         <>
-          <Link to={location.state?.from ?? '/'}>
+        {loading && <Loader />}
+        {!loading && <Link to={backLink.current}>
             <button type="button">Go back</button>
-          </Link>
-         {loading && <Loader />}
-         
-         {movieDetails &&  !error && <MoviesDetails movieDetails={movieDetails}/>}
-
-         
-         <h3>Additional information</h3>
+          </Link>}
+         {movieDetails && !loading && !error && <MoviesDetails movieDetails={movieDetails}/>}
+         {!loading && 
+         <>
+          <h3>Additional information</h3>
         <ul>
           <li>
             <Link to="cast">
@@ -62,9 +71,13 @@ const MoviesDetailsPage = () => {
             </Link>
           </li>
         </ul>
+         </>
+         }
         <Outlet/>
+        {error && !loading && toast.error('Sorry, something went wrong, please reload the page!',{
+               duration: 4000,
+            })}
         <Toaster position="top-right" reverseOrder={false}/>
-
         </>
         
     )

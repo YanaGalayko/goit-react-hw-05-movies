@@ -1,3 +1,4 @@
+
 import HomePage from "pages/HomePage";
 import MoviesDetailsPage from "pages/MoviesDetailsPage";
 import MoviesPage from "pages/MoviesPage"

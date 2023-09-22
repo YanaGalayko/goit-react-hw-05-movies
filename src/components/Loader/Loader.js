@@ -1,15 +1,17 @@
-import { RotatingLines } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
 import { LoaderStyled } from './LoaderStyled';
 
 const Loader = () => {
 return (
     <LoaderStyled>
-       <RotatingLines
-       strokeColor="grey"
-       strokeWidth="5"
-       animationDuration="0.75"
-       width="96"
-       visible={true}/>
+       <ProgressBar
+      height="120"
+      width="120"
+      ariaLabel="progress-bar-loading"
+      wrapperStyle={{}}
+      wrapperClass="progress-bar-wrapper"
+      borderColor = '#00BFFF'
+      barColor = '#FFFF00'/>
     </LoaderStyled>
 )
 }

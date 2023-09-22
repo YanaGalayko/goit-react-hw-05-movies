@@ -10,18 +10,21 @@ const [loading, setLoading] = useState(false)
 const [error, setError] = useState(false)
 
 useEffect(() => {
+    const controller = new AbortController()
+
     const getTrendMovies = async () => {
 try {
     setLoading(true)
     setError(false);
-    const data = await fetchTrendingMovies()
+    const data = await fetchTrendingMovies({signal: controller.signal})
     setMovies(data.results)
-    // console.log(data.results);
 } catch (error) {
-    setError(true);
-      toast.error('Sorry, something went wrong, please try again!',{
-        duration: 4000,
-    });
+    if (error.code !== 'ERR_CANCELED') {
+        setError(true);
+        toast.error('Sorry, something went wrong, please try again!',{
+          duration: 4000,
+      });
+    }  
 } finally {
     setLoading(false)
     setError(false);
@@ -29,14 +32,21 @@ try {
 
 getTrendMovies()
 
+return () => {
+    controller.abort()
+}
+
 }, [])
 
 
 return (
         <main>
-        <h2>Trending movies today</h2>
-        {loading && <Loader/>}
-        {movies.length > 0 && !loading && !error && <MoviesList movies={movies}/>}
+            {loading && <Loader/>}
+            {!loading && <h2>Trending movies today</h2>}
+            {movies.length > 0 && !loading && !error && <MoviesList movies={movies}/>}
+            {error && !loading &&  toast.error('Sorry, something went wrong, please reload the page!',{
+               duration: 4000,
+            })}
         <Toaster position="top-right" reverseOrder={false}/>
         </main>
     )

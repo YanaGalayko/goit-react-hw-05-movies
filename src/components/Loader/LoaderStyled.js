@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LoaderStyled = styled.div`
-  /* position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -9,6 +9,6 @@ export const LoaderStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.65); */
+  background-color: rgba(0, 0, 0, 0.65);
   z-index: 1200;
 `;
