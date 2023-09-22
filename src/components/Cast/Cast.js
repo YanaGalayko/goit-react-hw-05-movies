@@ -4,7 +4,7 @@ import { fetchCreditsMovie } from "services/api"
 import toast, {Toaster} from 'react-hot-toast';
 import Loader from "components/Loader/Loader";
 
-const defaultImg = '<https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700>'
+const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
 
 const Cast = () => {
 const {movieId} = useParams()
