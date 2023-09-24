@@ -8,7 +8,7 @@ export const Layout = styled.div`
   padding-bottom: 24px;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
 padding: 25px 25px;
 background: #008080;
 margin: 10px;

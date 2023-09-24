@@ -51,21 +51,12 @@ const MoviesPage = () => {
     
     }, [query])
 
-    // console.log(movies);
-    // if(!movies) {
-    //     toast.error(
-    //       'Sorry, there is no image for your search query, please try again!',{
-    //         duration: 4000,
-    //     });
-    //     return
-    //   }
-
     function onSubmit(e) {
         e.preventDefault();
-        const value = e.target.elements.query.value;
+        const value = e.target.elements.query.value.toLowerCase().trim('');
     
         if (value === '') {
-            return
+            return setSearchParams({})
         };
     
         setSearchParams({ query: value });
@@ -73,7 +64,6 @@ const MoviesPage = () => {
       }
 
     return (
-        <main>
             <Container>
             {loading && <Loader/>}
             <SearchBar onSubmit={onSubmit}/>
@@ -84,7 +74,6 @@ const MoviesPage = () => {
             })}
             <Toaster position="top-right" reverseOrder={false}/>
             </Container>
-        </main>
     )
 }
 

@@ -41,17 +41,16 @@ return () => {
 
 
 return (
-        <main>
-            <Container>
+        <Container>
             {loading && <Loader/>}
             {!loading && <Title>Trending movies today</Title>}
             {movies.length > 0 && !loading && !error && <MoviesList movies={movies}/>}
             {error && !loading &&  toast.error('Sorry, something went wrong, please reload the page!',{
                duration: 4000,
             })}
-        <Toaster position="top-right" reverseOrder={false}/>
+          <Toaster position="top-right" reverseOrder={false}/>
         </Container>
-        </main>
+      
     )
 }
 

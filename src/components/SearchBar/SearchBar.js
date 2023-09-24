@@ -3,14 +3,14 @@ import { SearchInput, SearchBtn } from "./SearchBarStyled";
 
 const SearchBar = ({onSubmit}) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const searchId = searchParams.get('searchId')
+    const searchMovies = searchParams.get('searchMovies')
 
-    const updateQueryString = evt => {
-        const queryValue = evt.target.value
-        if(queryValue === '') {
+    const updateQueryString = e => {
+        const searchValue = e.target.value
+        if(searchValue === '') {
             return setSearchParams({})
         }
-        setSearchParams({searchId: queryValue})
+        setSearchParams({searchMovies: searchValue})
     }
 
     return (
@@ -18,7 +18,7 @@ const SearchBar = ({onSubmit}) => {
             <SearchInput 
              type="text"
              name="query"
-             defaultValue={searchId}
+             defaultValue={searchMovies}
              autoComplete="off"
              autoFocus
              placeholder="Search movies"/>
